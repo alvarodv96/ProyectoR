@@ -7,7 +7,7 @@ output:
     orientation: rows
     social: menu
     source_code: embed
-    theme: cosmo
+    theme: united
 ---
 
 ```{r setup, include=FALSE}
@@ -30,7 +30,7 @@ Aspecto ofensivo
 El mapa de calor muestra los puntos por partido (PTS) junto al porcentaje de tiro a canasta (FGP).  Ordenados por puntos.
 
 ```{r}
-d3heatmap(nba_players_puntos, scale = "column", color = "YlOrRd", dendrogram="none")
+d3heatmap(nba_players_puntos, scale = "column", color = "YlOrRd", dendrogram="none", theme = "dark")
 ```
 
 ### **Mayores anotadores** {data-width=350}
@@ -46,7 +46,7 @@ Creación de juego
 El mapa de calor muestra las asistencias(AST), robos (STL) y las pérdidas de balón (TO). Ordenados por asistencias.
 
 ```{r}
-d3heatmap(nba_players_asistencias[,c("AST","STL","TO")], scale = "column", color = "YlOrRd", dendrogram="none")
+d3heatmap(nba_players_asistencias[,c("AST","STL","TO")], scale = "column", color = "YlOrRd", dendrogram="none",  theme = "dark")
 ```
 
 
@@ -63,7 +63,7 @@ Aspecto defensivo
 El mapa de calor muestra los rebotes (TRB) junto al número de robos (STL) y los tapones (BLK). Ordenados por rebotes.
 
 ```{r}
-d3heatmap(nba_players_defensa[,c("TRB","STL","BLK")], scale = "column", color = "YlOrRd", dendrogram="none")
+d3heatmap(nba_players_defensa[,c("TRB","STL","BLK")], scale = "column", color = "YlOrRd", dendrogram="none",  theme = "dark")
 ```
 
 ### **Mayores reboteadores** {data-width=350}
