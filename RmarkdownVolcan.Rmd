@@ -1,0 +1,30 @@
+
+---
+title: "**Volcanes**"
+author: "Álvaro Dorado, Miguel Añibarro"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    theme: united
+    highlight: tango
+---
+
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+library(viridis)
+```
+*Este código demuestra la paleta Mgma  en el paquete viridis (https://github.com/sjmgarnier/viridis) . Muestra un mapa de contorno del volcán Maunga Whau en Auckland, Nueva Zelanda.*
+
+## **Colores del magma**
+
+```{r fig.cap="El volcán Maunga Whau, Auckland."}
+image(volcano,col=viridis(200,option = "A"))
+```

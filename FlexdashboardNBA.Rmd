@@ -1,0 +1,72 @@
+---
+title: "Estadísticas NBA"
+author: "Álvaro Dorado, Miguel Añibarro"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    social: menu
+    source_code: embed
+    theme: cosmo
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(d3heatmap)
+library(flexdashboard)
+
+url <- "http://datasets.flowingdata.com/ppg2008.csv"
+nba_players <- read.csv(url, row.names = 1, header = TRUE)
+nba_players_puntos <- nba_players[,c("PTS","FGP")]
+nba_players_asistencias <- nba_players[,c("AST","STL","TO", "G", "MIN")]
+nba_players_asistencias <- nba_players_asistencias[order(-nba_players_asistencias$AST),]
+nba_players_defensa <- nba_players[,c("TRB","BLK","STL", "PF", "G", "MIN")]
+nba_players_defensa <- nba_players_defensa[order(-nba_players_defensa$TRB),]
+```
+Aspecto ofensivo
+=======================================================================
+ 
+### **Finalizadores**  {data-width=250}
+El mapa de calor muestra los puntos por partido (PTS) junto al porcentaje de tiro a canasta (FGP).  Ordenados por puntos.
+
+```{r}
+d3heatmap(nba_players_puntos, scale = "column", color = "YlOrRd", dendrogram="none")
+```
+
+### **Mayores anotadores** {data-width=350}
+
+```{r}
+knitr::kable(nba_players[1:20,c("PTS","FGM","G", "MIN")])
+```
+
+Creación de juego
+=======================================================================
+
+### **Creadores de juego** { data-width=250}
+El mapa de calor muestra las asistencias(AST), robos (STL) y las pérdidas de balón (TO). Ordenados por asistencias.
+
+```{r}
+d3heatmap(nba_players_asistencias[,c("AST","STL","TO")], scale = "column", color = "YlOrRd", dendrogram="none")
+```
+
+
+
+### **Mayores asistentes** {data-width=350}
+```{r}
+knitr::kable(nba_players_asistencias[1:20,c("AST","STL","TO", "G", "MIN")])
+```
+
+Aspecto defensivo
+=======================================================================
+
+### **Defensores** {data-width=250}
+El mapa de calor muestra los rebotes (TRB) junto al número de robos (STL) y los tapones (BLK). Ordenados por rebotes.
+
+```{r}
+d3heatmap(nba_players_defensa[,c("TRB","STL","BLK")], scale = "column", color = "YlOrRd", dendrogram="none")
+```
+
+### **Mayores reboteadores** {data-width=350}
+```{r}
+knitr::kable(nba_players_defensa[1:20,c("TRB","STL","BLK", "G", "MIN")])
+```
